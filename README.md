@@ -13,16 +13,12 @@ MonoGame.Extended (*uwp edition*) is a set of utilities (in the form of librarie
 ## Showcase
 ![](Images/sshot02.png)
 
-- Look at depth-delver (https://github.com/mediaexplorer74/depth-delver) to explore, how to use this uwp-fork of MonoGame.Extended ! 
+- Look at *depth-delver* (https://github.com/mediaexplorer74/depth-delver) game project to explore, how to use this uwp-fork of MonoGame.Extended ! 
 
 ## Tech details
 - UWP library : Min Win. SDK is *10240*, Main Win. SDK is 19041. So, W10M compatibility (and Project Astoria too) still planned… =) 
 - This is veeery quick (fast) and dirty "UWP-Remake" of popular MonoGame.Extended library for my own R.E. deals. I decided to share it with *you*. 
 - To be continued (I hope)
-
-
-### Using the Content Pipeline Extensions
-To use the content pipeline extension, please refer to the [Setup MGCB Edtior](https://www.monogameextended.net/docs/getting-started/installation-monogame/#optional-setup-mgcb-editor) documentation.
 
 ## TODO
 - Explore 100500 bugs. Try to fix them. 
