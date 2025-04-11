@@ -37,7 +37,10 @@ public class SpriteSheet
     /// <exception cref="ArgumentNullException">Thrown when the <paramref name="textureAtlas"/> is <c>null</c>.</exception>
     public SpriteSheet(string name, Texture2DAtlas textureAtlas)
     {
-        ArgumentNullException.ThrowIfNull(textureAtlas);
+        if (textureAtlas == null)
+        {
+            throw new ArgumentNullException(nameof(textureAtlas));
+        }
 
         TextureAtlas = textureAtlas;
         Name = name;

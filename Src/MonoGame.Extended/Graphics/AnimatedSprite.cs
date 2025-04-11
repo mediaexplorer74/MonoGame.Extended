@@ -37,7 +37,10 @@ public class AnimatedSprite : Sprite
     public AnimatedSprite(SpriteSheet spriteSheet)
         : base(spriteSheet.TextureAtlas[0])
     {
-        ArgumentNullException.ThrowIfNull(spriteSheet);
+        if (spriteSheet == null)
+        {
+            throw new ArgumentNullException(nameof(spriteSheet));
+        }
         _spriteSheet = spriteSheet;
     }
 

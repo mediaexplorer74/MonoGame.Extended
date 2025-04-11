@@ -108,7 +108,10 @@ public class NinePatch
     /// </exception>
     public NinePatch(Texture2DRegion[] patches, string name)
     {
-        ArgumentNullException.ThrowIfNull(patches);
+        if (patches == null)
+        {
+            throw new ArgumentNullException(nameof(patches));
+        }
         if (patches.Length != 9)
         {
             throw new ArgumentException($"{nameof(patches)} must contain exactly 9 elements.", nameof(patches));

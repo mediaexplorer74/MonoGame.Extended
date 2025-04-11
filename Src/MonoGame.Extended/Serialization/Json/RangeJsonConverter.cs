@@ -1,6 +1,8 @@
+using MonoGame.Extended.Particles.Serialization;
+using Newtonsoft.Json;
 using System;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+//using System.Text.Json;
+//using System.Text.Json.Serialization;
 
 namespace MonoGame.Extended.Serialization.Json;
 
@@ -10,10 +12,12 @@ namespace MonoGame.Extended.Serialization.Json;
 public class RangeJsonConverter<T> : JsonConverter<Range<T>> where T : IComparable<T>
 {
     /// <inheritdoc />
-    public override bool CanConvert(Type typeToConvert) => typeToConvert == typeof(Range<T>);
+    public /*override*/ bool CanConvert(Type typeToConvert) 
+        => typeToConvert == typeof(Range<T>);
 
     /// <inheritdoc />
-    public override Range<T> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public /*override*/ Range<T> Read(ref Utf8JsonReader reader, 
+        Type typeToConvert, JsonSerializerOptions options)
     {
         Span<T> values = reader.ReadAsMultiDimensional<T>(options);
 
@@ -35,16 +39,36 @@ public class RangeJsonConverter<T> : JsonConverter<Range<T>> where T : IComparab
         throw new InvalidOperationException("Invalid range");
     }
 
+    public override Range<T> ReadJson(JsonReader reader, Type objectType, 
+        Range<T> existingValue, bool hasExistingValue, JsonSerializer serializer)
+    {
+        throw new NotImplementedException();
+    }
+
     /// <inheritdoc />
     /// <exception cref="ArgumentNullException">
     /// Throw if <paramref name="writer"/> is <see langword="null"/>.
     /// </exception>
-    public override void Write(Utf8JsonWriter writer, Range<T> value, JsonSerializerOptions options)
+    public /*override*/ void Write(Utf8JsonWriter writer, Range<T> value,
+        JsonSerializerOptions options)
     {
-        ArgumentNullException.ThrowIfNull(writer);
+        if (writer == null)
+        {
+            throw new ArgumentNullException(nameof(writer));
+        }
+
         writer.WriteStartArray();
-        JsonSerializer.Serialize(writer, value.Min, options);
-        JsonSerializer.Serialize(writer, value.Max, options);
+
+        JsonSerializer Serializer = new JsonSerializer();
+        Serializer.Serialize(writer, value.Min/*, options*/);
+        Serializer.Serialize(writer, value.Max/*, options*/);
+
         writer.WriteEndArray();
+    }
+
+    public override void WriteJson(JsonWriter writer, Range<T> value, 
+        JsonSerializer serializer)
+    {
+        throw new NotImplementedException();
     }
 }

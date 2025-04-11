@@ -12,6 +12,11 @@ namespace MonoGame.Extended.Particles.Serialization
             return false;
         }
 
+        internal double GetDouble()
+        {
+            throw new NotImplementedException();
+        }
+
         internal int GetInt32()
         {
             throw new NotImplementedException();

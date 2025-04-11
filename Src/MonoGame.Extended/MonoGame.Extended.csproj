@@ -142,7 +142,6 @@
     <Compile Include="BitmapFonts\BitmapFont.Extensions.cs" />
     <Compile Include="BitmapFonts\BitmapFontCharacter.cs" />
     <Compile Include="Camera.cs" />
-    <Compile Include="Class1.cs" />
     <Compile Include="Collections\Bag.cs" />
     <Compile Include="Collections\Deque.cs" />
     <Compile Include="Collections\DictionaryExtensions.cs" />
@@ -174,8 +173,12 @@
     <Compile Include="Content\ContentReaders\BitmapFontContentReader.cs" />
     <Compile Include="Content\ContentReaders\JsonContentTypeReader.cs" />
     <Compile Include="Content\ContentReaders\Texture2DAtlasReader.cs" />
+    <Compile Include="Content\DefaultColorProcessor.cs" />
     <Compile Include="Content\ExtendedContentManager.cs" />
+    <Compile Include="Content\TexturePacker\Frame.cs" />
     <Compile Include="Content\TexturePacker\JsonPropertyNameAttribute.cs" />
+    <Compile Include="Content\TexturePacker\Meta.cs" />
+    <Compile Include="Content\TexturePacker\Region.cs" />
     <Compile Include="Content\TexturePacker\TexturePackerFileContent.cs" />
     <Compile Include="Content\TexturePacker\TexturePackerFileContent1.cs" />
     <Compile Include="Content\TexturePacker\TexturePackerFileReader.cs" />
@@ -394,6 +397,7 @@
     <Compile Include="Shapes\Polyline.cs" />
     <Compile Include="SimpleDrawableGameComponent.cs" />
     <Compile Include="SimpleGameComponent.cs" />
+    <Compile Include="System\Runtime\CompilerServices\Unsafe.cs" />
     <Compile Include="Tiled\Renderers\TiledMapAnimatedLayerModel.cs" />
     <Compile Include="Tiled\Renderers\TiledMapAnimatedLayerModelBuilder.cs" />
     <Compile Include="Tiled\Renderers\TiledMapEffect.cs" />

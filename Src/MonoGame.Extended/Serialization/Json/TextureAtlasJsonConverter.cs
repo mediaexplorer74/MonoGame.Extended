@@ -1,12 +1,14 @@
 using System;
 using System.IO;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+//using System.Text.Json;
+//using System.Text.Json.Serialization;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended.Content;
 using MonoGame.Extended.Content.TexturePacker;
 using MonoGame.Extended.Graphics;
+using MonoGame.Extended.Particles.Serialization;
+using Newtonsoft.Json;
 
 namespace MonoGame.Extended.Serialization.Json
 {
@@ -22,11 +24,11 @@ namespace MonoGame.Extended.Serialization.Json
         }
 
         /// <inheritdoc />
-        public override bool CanConvert(Type typeToConvert) => typeToConvert == typeof(Texture2DAtlas);
+        public /*override*/ bool CanConvert(Type typeToConvert) => typeToConvert == typeof(Texture2DAtlas);
 
-        public override Texture2DAtlas Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public /*override*/ Texture2DAtlas Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            if (reader.TokenType == JsonTokenType.String)
+            if (reader.TokenType == JsonToken.String)
             {
                 // TODO: (Aristurtle 05/20/2024) What is this for? It's just an if block that throws an exception. Need
                 // to investigate.
@@ -39,7 +41,8 @@ namespace MonoGame.Extended.Serialization.Json
             }
             else
             {
-                var metadata = JsonSerializer.Deserialize<InlineTextureAtlas>(ref reader, options);
+                JsonSerializer Serializer = new JsonSerializer();
+                var metadata = Serializer.Deserialize<InlineTextureAtlas>(/*ref*/ reader/*, options*/);
 
                 // TODO: When we get to .NET Standard 2.1 it would be more robust to use
                 // [Path.GetRelativePath](https://docs.microsoft.com/en-us/dotnet/api/system.io.path.getrelativepath?view=netstandard-2.1)
@@ -65,7 +68,9 @@ namespace MonoGame.Extended.Serialization.Json
         }
 
         /// <inheritdoc />
-        public override void Write(Utf8JsonWriter writer, Texture2DAtlas value, JsonSerializerOptions options) { }
+        public /*override*/ void Write(Utf8JsonWriter writer, Texture2DAtlas value, 
+            JsonSerializerOptions options) 
+        { }
 
 
         // ReSharper disable once ClassNeverInstantiated.Local
@@ -80,6 +85,16 @@ namespace MonoGame.Extended.Serialization.Json
         {
             var directory = Path.GetDirectoryName(_path);
             return Path.Combine(directory, relativePath);
+        }
+
+        public override void WriteJson(JsonWriter writer, Texture2DAtlas value, JsonSerializer serializer)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Texture2DAtlas ReadJson(JsonReader reader, Type objectType, Texture2DAtlas existingValue, bool hasExistingValue, JsonSerializer serializer)
+        {
+            throw new NotImplementedException();
         }
     }
 }

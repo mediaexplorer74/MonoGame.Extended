@@ -30,7 +30,7 @@ namespace MonoGame.Extended.ECS
 
         private ComponentMapper CreateMapperForType(Type type, int componentTypeId)
         {
-            if (!type.IsClass)
+            if (!type.GetTypeInfo().IsClass)
                 throw new ArgumentException("Type must be a class type.", nameof(type));
 
             // TODO: We can probably do better than this without a huge performance penalty by creating our own bit vector that grows after the first 32 bits.

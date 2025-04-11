@@ -1,7 +1,9 @@
 using System;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+//using System.Text.Json;
+//using System.Text.Json.Serialization;
 using MonoGame.Extended.Graphics;
+using MonoGame.Extended.Particles.Serialization;
+using Newtonsoft.Json;
 
 namespace MonoGame.Extended.Serialization.Json;
 
@@ -22,17 +24,17 @@ public class NinePatchJsonConverter : JsonConverter<NinePatch>
     }
 
     /// <inheritdoc />
-    public override bool CanConvert(Type typeToConvert) => typeToConvert == typeof(NinePatch);
+    public /*override*/ bool CanConvert(Type typeToConvert) => typeToConvert == typeof(NinePatch);
 
     /// <inheritdoc />
     /// <exception cref="JsonException">
     /// Thrown if the JSON property does not contain a properly formatted <see cref="NinePatch"/> value
     /// </exception>
-    public override NinePatch Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public /*override*/ NinePatch Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-        if (reader.TokenType != JsonTokenType.StartObject)
+        if (reader.TokenType != JsonToken.StartObject)
         {
-            throw new JsonException($"Expected {nameof(JsonTokenType.StartObject)} token");
+            throw new JsonException($"Expected {nameof(JsonToken.StartObject)} token");
         }
 
         string padding = string.Empty;
@@ -40,12 +42,12 @@ public class NinePatchJsonConverter : JsonConverter<NinePatch>
 
         while (reader.Read())
         {
-            if (reader.TokenType == JsonTokenType.EndObject)
+            if (reader.TokenType == JsonToken.EndObject)
             {
                 break;
             }
 
-            if (reader.TokenType == JsonTokenType.PropertyName)
+            if (reader.TokenType == JsonToken.PropertyName)
             {
                 var propertyName = reader.GetString();
                 reader.Read();
@@ -71,17 +73,25 @@ public class NinePatchJsonConverter : JsonConverter<NinePatch>
         return region.CreateNinePatch(thickness);
     }
 
+    public override NinePatch ReadJson(JsonReader reader, Type objectType, NinePatch existingValue, bool hasExistingValue, JsonSerializer serializer)
+    {
+        throw new NotImplementedException();
+    }
+
     /// <inheritdoc />
     /// <exception cref="ArgumentNullException">
     /// Throw if <paramref name="writer"/> is <see langword="null"/>.
     /// </exception>
-    public override void Write(Utf8JsonWriter writer, NinePatch value, JsonSerializerOptions options)
+    public /*override*/ void Write(Utf8JsonWriter writer, NinePatch value, JsonSerializerOptions options)
     {
-        ArgumentNullException.ThrowIfNull(writer);
+        if (writer == null)
+        {
+            throw new ArgumentNullException(nameof(writer));
+        }
 
         if (value is null)
         {
-            writer.WriteNullValue();
+            writer.WriteNull(); // Fix: Replaced WriteNullValue() with WriteNull()
             return;
         }
 
@@ -89,5 +99,10 @@ public class NinePatchJsonConverter : JsonConverter<NinePatch>
         writer.WriteString("TextureRegion", value.Name);
         writer.WriteString("Padding", value.Padding.ToString());
         writer.WriteEndObject();
+    }
+
+    public override void WriteJson(JsonWriter writer, NinePatch value, JsonSerializer serializer)
+    {
+        throw new NotImplementedException();
     }
 }

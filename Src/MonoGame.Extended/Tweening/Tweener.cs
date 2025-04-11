@@ -112,17 +112,17 @@ namespace MonoGame.Extended.Tweening
         }
 
         private TweenMember<T> CreateMember<T>(object target, string memberName)
-            where T : struct
+           where T : struct
         {
             AllocationCount++;
 
             var type = target.GetType();
-            var property = type.GetTypeInfo().GetProperty(memberName);
+            var property = type.GetProperty(memberName); // Updated to use Type.GetProperty directly  
 
             if (property != null)
                 return new TweenPropertyMember<T>(target, property);
 
-            var field = type.GetTypeInfo().GetField(memberName);
+            var field = type.GetField(memberName); // Updated to use Type.GetField directly  
 
             if (field != null)
                 return new TweenFieldMember<T>(target, field);

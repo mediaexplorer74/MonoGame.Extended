@@ -88,13 +88,13 @@ namespace MonoGame.Extended.Particles.Serialization
         private static Profile ReadRingProfile(ref Utf8JsonReader reader)
         {
             reader.Read();
-            Debug.Assert(reader.TokenType == JsonTokenType.PropertyName);
+            Debug.Assert(reader.TokenType == JsonToken.PropertyName);
             Debug.Assert(reader.GetString().Equals("radius", StringComparison.OrdinalIgnoreCase));
             reader.Read();
             float radius = reader.GetSingle();
 
             reader.Read();
-            Debug.Assert(reader.TokenType == JsonTokenType.PropertyName);
+            Debug.Assert(reader.TokenType == JsonToken.PropertyName);
             Debug.Assert(reader.GetString().Equals("radiate", StringComparison.OrdinalIgnoreCase));
             reader.Read();
             int radiate = reader.GetInt32();
@@ -105,13 +105,13 @@ namespace MonoGame.Extended.Particles.Serialization
         private static Profile ReadBoxProfile(ref Utf8JsonReader reader)
         {
             reader.Read();
-            Debug.Assert(reader.TokenType == JsonTokenType.PropertyName);
+            Debug.Assert(reader.TokenType == JsonToken.PropertyName);
             Debug.Assert(reader.GetString().Equals("width", StringComparison.OrdinalIgnoreCase));
             reader.Read();
             float width = reader.GetSingle();
 
             reader.Read();
-            Debug.Assert(reader.TokenType == JsonTokenType.PropertyName);
+            Debug.Assert(reader.TokenType == JsonToken.PropertyName);
             Debug.Assert(reader.GetString().Equals("height", StringComparison.OrdinalIgnoreCase));
             reader.Read();
             float height = reader.GetSingle();
@@ -122,13 +122,13 @@ namespace MonoGame.Extended.Particles.Serialization
         private static Profile ReadBoxFillProfile(ref Utf8JsonReader reader)
         {
             reader.Read();
-            Debug.Assert(reader.TokenType == JsonTokenType.PropertyName);
+            Debug.Assert(reader.TokenType == JsonToken.PropertyName);
             Debug.Assert(reader.GetString().Equals("width", StringComparison.OrdinalIgnoreCase));
             reader.Read();
             float width = reader.GetSingle();
 
             reader.Read();
-            Debug.Assert(reader.TokenType == JsonTokenType.PropertyName);
+            Debug.Assert(reader.TokenType == JsonToken.PropertyName);
             Debug.Assert(reader.GetString().Equals("height", StringComparison.OrdinalIgnoreCase));
             reader.Read();
             float height = reader.GetSingle();
@@ -139,13 +139,13 @@ namespace MonoGame.Extended.Particles.Serialization
         private static Profile ReadBoxUniformProfile(ref Utf8JsonReader reader)
         {
             reader.Read();
-            Debug.Assert(reader.TokenType == JsonTokenType.PropertyName);
+            Debug.Assert(reader.TokenType == JsonToken.PropertyName);
             Debug.Assert(reader.GetString().Equals("width", StringComparison.OrdinalIgnoreCase));
             reader.Read();
             float width = reader.GetSingle();
 
             reader.Read();
-            Debug.Assert(reader.TokenType == JsonTokenType.PropertyName);
+            Debug.Assert(reader.TokenType == JsonToken.PropertyName);
             Debug.Assert(reader.GetString().Equals("height", StringComparison.OrdinalIgnoreCase));
             reader.Read();
             float height = reader.GetSingle();
@@ -183,7 +183,7 @@ namespace MonoGame.Extended.Particles.Serialization
 
             reader.Read();
             Debug.Assert(reader.TokenType == JsonToken.PropertyName);
-            Debug.Assert(reader.GetString().Equals("spread", StringComparison.Ordinal                                           e));
+            Debug.Assert(reader.GetString().Equals("spread", StringComparison.OrdinalIgnoreCase));
             reader.Read();
             float spread = reader.GetSingle();
 

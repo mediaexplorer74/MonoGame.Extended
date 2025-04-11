@@ -99,8 +99,8 @@ namespace MonoGame.Extended.Input
         /// <summary>
         /// Returns the total number of keys down during the current state.
         /// </summary>
-        public int GetPressedKeyCount => _currentKeyboardState.GetPressedKeyCount();
-
+       
+        public int GetPressedKeyCount => _currentKeyboardState.GetPressedKeys().Length;
         /// <summary>
         /// Returns an array of all keys that are down during the current state.
         /// </summary>
@@ -118,9 +118,17 @@ namespace MonoGame.Extended.Input
         /// </exception>
         /// <exception cref="ArgumentOutOfRangeException">
         /// Thrown if the array provided by the <paramref name="keys"/> parameter is not large enough to fit all
-        /// pressed keys.  Use <see cref="GetPressedKeyCount"/> to determine the total number of elements.
+        /// pressed keys. Use <see cref="GetPressedKeyCount"/> to determine the total number of elements.
         /// </exception>
-        public void GetPressedKeys(Keys[] keys) => _currentKeyboardState.GetPressedKeys(keys);
+        public void GetPressedKeys(Keys[] keys)
+        {
+            var pressedKeys = _currentKeyboardState.GetPressedKeys();
+            if (keys == null)
+                throw new ArgumentNullException(nameof(keys));
+            if (keys.Length < pressedKeys.Length)
+                throw new ArgumentOutOfRangeException(nameof(keys), "The provided array is not large enough to hold all pressed keys.");
+            Array.Copy(pressedKeys, keys, pressedKeys.Length);
+        }
 
         /// <summary>
         /// Returns whether the given key was down during previous state, but is now up.
@@ -146,6 +154,6 @@ namespace MonoGame.Extended.Input
         /// <returns>
         /// <see langword="true"/> if any key was pressed during the previous state; otherwise, <see langword="false"/>.
         /// </returns>
-        public bool WasAnyKeyJustDown() => _previousKeyboardState.GetPressedKeyCount() > 0;
+        public bool WasAnyKeyJustDown() => _previousKeyboardState.GetPressedKeys().Length > 0;
    }
 }

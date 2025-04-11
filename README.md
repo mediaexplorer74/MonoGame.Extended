@@ -6,8 +6,14 @@ MonoGame.Extended (*uwp edition*) is a set of utilities (in the form of librarie
 
 [![Docs](https://img.shields.io/badge/Docs-latest-brightgreen.svg?style=flat)](http://www.monogameextended.net/)
 
-## Getting started
- Work-in-progress.
+## Showcae / Status / State of dev
+ Work-in-progress. But forked solution can be compiled (can build))):
+![](Images/sshot01.png)
+
+## Tech details
+- UWP library : Min Win. SDK is *10240*, Main Win. SDK is 19041. So, W10M compatibility (and Project Astoria too) still planned… =) 
+- This is veeery quick (fast) and dirty "UWP-Remake" of popular MonoGame.Extended library for my own R.E. deals. I decided to share it with *you*. 
+- To be continued (I hope)
 
 
 ### Using the Content Pipeline Extensions

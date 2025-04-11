@@ -95,7 +95,10 @@ public class Sprite : IColorable
         get => _textureRegion;
         set
         {
-            ArgumentNullException.ThrowIfNull(value);
+            if (value == null)
+            {
+                throw new ArgumentNullException(nameof(value));
+            }
             if (value.Texture.IsDisposed)
             {
                 throw new ObjectDisposedException(nameof(value), $"The source {nameof(Texture2D)} of the {nameof(TextureRegion)} was disposed prior to setting this property.");
@@ -133,7 +136,10 @@ public class Sprite : IColorable
     /// </exception>
     public Sprite(Texture2DRegion textureRegion)
     {
-        ArgumentNullException.ThrowIfNull(textureRegion);
+        if (textureRegion == null)
+        {
+            throw new ArgumentNullException(nameof(textureRegion));
+        }
         if (textureRegion.Texture.IsDisposed)
         {
             throw new ObjectDisposedException(nameof(textureRegion), $"The source {nameof(Texture2D)} of the {nameof(textureRegion)} was disposed prior.");

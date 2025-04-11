@@ -21,6 +21,7 @@ namespace MonoGame.Extended.Content;
 public class ExtendedContentManager : ContentManager
 {
     private List<IDisposable> _disposableAssets;
+    private DefaultColorProcessor DefaultColorProcessors;
     private readonly IGraphicsDeviceService _graphicsDeviceService;
 
     public List<IDisposable> DisposeableAssets
@@ -144,9 +145,11 @@ public class ExtendedContentManager : ContentManager
         }
 
         using Stream stream = GetStream(path);
+
+        //RnD
         texture = premultiplyAlpha
             ? Texture2D.FromStream(_graphicsDeviceService.GraphicsDevice, stream)
-            : Texture2D.FromStream(_graphicsDeviceService.GraphicsDevice, stream, DefaultColorProcessors.PremultiplyAlpha);
+            : Texture2D.FromStream(_graphicsDeviceService.GraphicsDevice, stream/*, DefaultColorProcessors.PremultiplyAlpha*/);
         texture.Name = path;
         CacheAsset(path, texture);
         return texture;
@@ -205,8 +208,9 @@ public class ExtendedContentManager : ContentManager
         using FileStream stream = GetStream(path);
         var bmfFile = BitmapFontFileReader.Read(stream);
 
+        //RnD
         var textures =
-            bmfFile.Pages.Select(page => LoadTexture2D(Path.GetRelativePath(path, page)))
+            bmfFile.Pages.Select(page => LoadTexture2D(/*Path.GetRelativePath(path, page)*/path + "/" + page))
             .ToArray();
 
         var characters = new Dictionary<int, BitmapFontCharacter>();
@@ -259,21 +263,22 @@ public class ExtendedContentManager : ContentManager
         }
 
         using var stream = GetStream(path);
-        
-        var tpFile = TexturePackerFileReader.Read(stream);
+
+        TexturePackerFileContent tpFile = TexturePackerFileReader.Read(stream);
         var dir = Path.GetDirectoryName(path);
         var imageAssetPath = Path.Combine(dir, tpFile.Meta.Image);
 
 #if KNI || FNA
-        var texture = LoadTexture2D(imageAssetPath);
+        Texture2D texture = LoadTexture2D(imageAssetPath);
 #else
-        var texture = LoadTexture2D(imageAssetPath, premultiplyAlpha);
+        Texture2D texture = LoadTexture2D(imageAssetPath, premultiplyAlpha);
 #endif
         atlas = new Texture2DAtlas(Path.GetFileNameWithoutExtension(tpFile.Meta.Image), texture);
 
+        //RnD
         foreach(var region in tpFile.Regions)
         {
-            var frame = region.Frame;
+            Frame frame = region.Frame;
             atlas.CreateRegion(frame.X, frame.Y, frame.Width, frame.Height, Path.GetFileNameWithoutExtension(region.FileName));
         }
 

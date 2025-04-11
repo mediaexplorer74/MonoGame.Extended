@@ -2,14 +2,13 @@
 // Licensed under the MIT license.
 // See LICENSE file in the project root for full license information.
 
-using SharpDX.MediaFoundation;
-
 namespace MonoGame.Extended.Content.TexturePacker
 {
-    public class TexturePackerFileContent
+    public class Frame
     {
-        public Meta Meta;
-
-        public Region[] Regions;
+        internal int X;
+        internal int Y;
+        internal int Width;
+        internal int Height;
     }
 }

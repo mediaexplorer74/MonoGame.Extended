@@ -79,7 +79,10 @@ public static class Texture2DRegionExtensions
     /// </exception>
     public static Texture2DRegion GetSubregion(this Texture2DRegion textureRegion, int x, int y, int width, int height, string name)
     {
-        ArgumentNullException.ThrowIfNull(textureRegion);
+        if (textureRegion == null)
+        {
+            throw new ArgumentNullException(nameof(textureRegion));
+        }
 
         if (string.IsNullOrEmpty(name))
         {

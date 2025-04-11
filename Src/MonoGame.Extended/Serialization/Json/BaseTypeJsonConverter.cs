@@ -59,7 +59,7 @@ namespace MonoGame.Extended.Serialization.Json
         /// <exception cref="ArgumentNullException">
         /// Throw if <paramref name="writer"/> is <see langword="null"/>.
         /// </exception>
-        public override void Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
+        public /*override*/ void Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
         {
             var type = value.GetType();
             var properties = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
@@ -71,7 +71,9 @@ namespace MonoGame.Extended.Serialization.Json
             {
                 var propertyName = _namingPolicy.ConvertName(property.Name);
                 writer.WritePropertyName(propertyName);
-                JsonSerializer.Serialize(writer, property.GetValue(value), property.PropertyType, options);
+                              
+                JsonSerializer Serializer = new JsonSerializer();
+                Serializer.Serialize(writer, property.PropertyType/*, options*/);
             }
 
             writer.WriteEndObject();

@@ -1,7 +1,9 @@
 using System;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+//using System.Text.Json;
+//using System.Text.Json.Serialization;
 using MonoGame.Extended.Graphics;
+using MonoGame.Extended.Particles.Serialization;
+using Newtonsoft.Json;
 
 namespace MonoGame.Extended.Serialization.Json;
 
@@ -21,18 +23,27 @@ public class TextureRegion2DJsonConverter : JsonConverter<Texture2DRegion>
     /// </exception>
     public TextureRegion2DJsonConverter(ITextureRegionService textureRegionService)
     {
-        ArgumentNullException.ThrowIfNull(textureRegionService);
+        if (textureRegionService == null)
+        {
+            throw new ArgumentNullException(nameof(textureRegionService));
+        }
         _textureRegionService = textureRegionService;
     }
 
     /// <inheritdoc />
-    public override bool CanConvert(Type typeToConvert) => typeToConvert == typeof(Texture2DRegion);
+    public /*override*/ bool CanConvert(Type typeToConvert) => typeToConvert == typeof(Texture2DRegion);
 
     /// <inheritdoc />
-    public override Texture2DRegion Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public /*override*/ Texture2DRegion Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         var regionName = reader.GetString();
         return string.IsNullOrEmpty(regionName) ? null : _textureRegionService.GetTextureRegion(regionName);
+    }
+
+    public override Texture2DRegion ReadJson(JsonReader reader, Type objectType, Texture2DRegion existingValue, 
+        bool hasExistingValue, JsonSerializer serializer)
+    {
+        throw new NotImplementedException();
     }
 
     /// <inheritdoc />
@@ -43,10 +54,21 @@ public class TextureRegion2DJsonConverter : JsonConverter<Texture2DRegion>
     ///
     /// Thrown if <paramref name="value"/> is <see langword="null"/>.
     /// </exception>
-    public override void Write(Utf8JsonWriter writer, Texture2DRegion value, JsonSerializerOptions options)
+    public /*override*/ void Write(Utf8JsonWriter writer, Texture2DRegion value, JsonSerializerOptions options)
     {
-        ArgumentNullException.ThrowIfNull(writer);
-        ArgumentNullException.ThrowIfNull(value);
+        if (writer == null)
+        {
+            throw new ArgumentNullException(nameof(writer));
+        }
+        if (value == null)
+        {
+            throw new ArgumentNullException(nameof(value));
+        }
         writer.WriteStringValue(value.Name);
+    }
+
+    public override void WriteJson(JsonWriter writer, Texture2DRegion value, JsonSerializer serializer)
+    {
+        throw new NotImplementedException();
     }
 }

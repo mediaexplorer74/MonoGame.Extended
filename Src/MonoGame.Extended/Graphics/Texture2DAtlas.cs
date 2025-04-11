@@ -92,7 +92,10 @@ public class Texture2DAtlas : IEnumerable<Texture2DRegion>
     /// <exception cref="ObjectDisposedException">Thrown if <paramref name="texture"/> is disposed.</exception>
     public Texture2DAtlas(string name, Texture2D texture)
     {
-        ArgumentNullException.ThrowIfNull(texture);
+        if (texture == null)
+        {
+            throw new ArgumentNullException(nameof(texture));
+        }
         if (texture.IsDisposed)
         {
             throw new ObjectDisposedException(nameof(texture), $"{nameof(texture)} was disposed prior");

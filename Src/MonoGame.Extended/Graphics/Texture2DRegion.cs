@@ -171,7 +171,10 @@ public class Texture2DRegion
     /// </exception>
     public Texture2DRegion(Texture2D texture,int x, int y, int width, int height, string name)
     {
-        ArgumentNullException.ThrowIfNull(texture);
+        if (texture == null)
+        {
+            throw new ArgumentNullException(nameof(texture));
+        }
         if (texture.IsDisposed)
         {
             throw new ObjectDisposedException(nameof(texture));

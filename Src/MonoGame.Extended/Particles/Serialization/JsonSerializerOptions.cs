@@ -19,6 +19,5 @@ namespace MonoGame.Extended.Particles.Serialization
 
         public bool WriteIndented { get; internal set; }
     }
-    {
-    }
+  
 }

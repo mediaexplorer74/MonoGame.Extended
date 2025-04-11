@@ -51,7 +51,8 @@ namespace MonoGame.Extended.Collections
 
         public Bag(int capacity = 16)
         {
-            _isPrimitive = typeof(T).IsPrimitive;
+            //RnD
+            _isPrimitive = default;//typeof(T).GetTypeInfo().IsPrimitive;
             _items = new T[capacity];
         }
 

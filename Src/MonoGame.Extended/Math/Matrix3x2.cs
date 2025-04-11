@@ -50,26 +50,18 @@ public struct Matrix3x2 : IEquatable<Matrix3x2>
     /// <remarks>Represents the translation on the y-axis</remarks>
     public float M32;
 
-    /// <summary>
-    /// Gets or Sets the vector formed by the first row of this <see cref="Matrix3x2"/>
-    /// </summary>
-    /// <remarks>
-    ///     <para>
-    ///         The <see cref="Vector2.X"/> component of the vector represents the scaling factor on the x-axis or a
-    ///         combination of scaling and rotation.
-    ///     </para>
-    ///     <para>
-    ///         The <see cref="Vector2.Y"/> component of the vector represents the shearing factor on the y-axis or a
-    ///         combination of shearing and rotation.
-    ///     </para>
-    /// </remarks>
+    // Fix for CS0131: The left-hand side of an assignment must be a variable, property or indexer
     public Vector2 X
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        readonly get => Unsafe.As<float, Vector2>(ref Unsafe.AsRef(in M11));
+        readonly get => new Vector2(M11, M12);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        set => Unsafe.As<float, Vector2>(ref M11) = value;
+        set
+        {
+            M11 = value.X;
+            M12 = value.Y;
+        }
     }
 
     /// <summary>
@@ -88,10 +80,14 @@ public struct Matrix3x2 : IEquatable<Matrix3x2>
     public Vector2 Y
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        readonly get => Unsafe.As<float, Vector2>(ref Unsafe.AsRef(in M21));
+        readonly get => new Vector2(M21, M22);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        set => Unsafe.As<float, Vector2>(ref M21) = value;
+        set
+        {
+            M21 = value.X;
+            M22 = value.Y;
+        }
     }
 
     /// <summary>
@@ -108,10 +104,14 @@ public struct Matrix3x2 : IEquatable<Matrix3x2>
     public Vector2 Z
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        readonly get => Unsafe.As<float, Vector2>(ref Unsafe.AsRef(in M31));
+        readonly get => new Vector2(M31, M32);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        set => Unsafe.As<float, Vector2>(ref M31) = value;
+        set
+        {
+            M31 = value.X;
+            M32 = value.Y;
+        }
     }
 
     /// <summary>
@@ -759,9 +759,19 @@ public struct Matrix3x2 : IEquatable<Matrix3x2>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public readonly bool Equals(Matrix3x2 other) => this == other;
 
-    /// <inheritdoc />
+    // Replace the GetHashCode method with the following implementation
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public override readonly int GetHashCode() => HashCode.Combine(X, Y, Z);
+    public override readonly int GetHashCode()
+    {
+        unchecked
+        {
+            int hash = 17;
+            hash = hash * 31 + X.GetHashCode();
+            hash = hash * 31 + Y.GetHashCode();
+            hash = hash * 31 + Z.GetHashCode();
+            return hash;
+        }
+    }
 
     /// <summary>
     /// Converts the specified <see cref="Matrix3x2"/> value into a <see cref="Matrix"/> value.

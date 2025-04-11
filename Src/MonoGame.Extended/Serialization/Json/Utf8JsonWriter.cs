@@ -53,5 +53,10 @@ namespace MonoGame.Extended.Serialization.Json
         {
             throw new NotImplementedException();
         }
+
+        internal void WriteNumberValue(double totalSeconds)
+        {
+            throw new NotImplementedException();
+        }
     }  
 }
