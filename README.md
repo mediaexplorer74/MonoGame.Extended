@@ -7,8 +7,13 @@ MonoGame.Extended (*uwp edition*) is a set of utilities (in the form of librarie
 [![Docs](https://img.shields.io/badge/Docs-latest-brightgreen.svg?style=flat)](http://www.monogameextended.net/)
 
 ## Status / State of dev
- Work-in-progress. But forked solution can be compiled (can build))):
+ Work-in-progress. But forked solution can be compiled (can build , at minimum!))):
 ![](Images/sshot01.png)
+
+## Showcase
+![](Images/sshot02.png)
+
+- Look at depth-delver (https://github.com/mediaexplorer74/depth-delver) to explore, how to use this uwp-fork of MonoGame.Extended ! 
 
 ## Tech details
 - UWP library : Min Win. SDK is *10240*, Main Win. SDK is 19041. So, W10M compatibility (and Project Astoria too) still planned… =) 
@@ -33,11 +38,9 @@ As a special thanks to those that supported this project through Patreon in the 
 - John McDonald for [2D XNA Primitives](https://bitbucket.org/C3/2d-xna-primitives/wiki/Home)
 - [LibGDX](https://libgdx.badlogicgames.com) for a whole lot of inspiration.
 - [@prime31](https://github.com/prime31) for [`Nez`](https://github.com/prime31/Nez). Both `MonoGame.Extended` and `Nez` are in communication with each other to share ideas.
+- And a special thinks to all contributors!
 
-And a special thinks to all contributors!
-<a href="https://github.com/craftworkgames/monogame.extended/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=craftworkgames/monogame.extended" />
-</a>
+ 
 
 ## License
 MonoGame.Extended is released under the [MIT License (MIT)](https://opensource.org/license/mit). Please refer to the [LICENSE](LICENSE) file for full license text.
