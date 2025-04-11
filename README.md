@@ -6,7 +6,7 @@ MonoGame.Extended (*uwp edition*) is a set of utilities (in the form of librarie
 
 [![Docs](https://img.shields.io/badge/Docs-latest-brightgreen.svg?style=flat)](http://www.monogameextended.net/)
 
-## Showcae / Status / State of dev
+## Status / State of dev
  Work-in-progress. But forked solution can be compiled (can build))):
 ![](Images/sshot01.png)
 
