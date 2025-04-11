@@ -1,4 +1,4 @@
-# MonoGame.Extended
+# MonoGame.Extended - develop branch
 ![](Images/logo.png)
 
 ## About this fork
@@ -19,15 +19,8 @@ MonoGame.Extended (*uwp edition*) is a set of utilities (in the form of librarie
 ### Using the Content Pipeline Extensions
 To use the content pipeline extension, please refer to the [Setup MGCB Edtior](https://www.monogameextended.net/docs/getting-started/installation-monogame/#optional-setup-mgcb-editor) documentation.
 
-## Where to next?
-- Check out [the samples](https://github.com/craftworkgames/MonoGame.Extended-samples)
-- Join our live [Discord](https://discord.gg/FvZ8Z7EzPJ)
-- Read the [Documentation](https://www.monogameextended.net/docs/about/introduction/)
-- Submit an [issue on GitHub](https://github.com/craftworkgames/MonoGame.Extended/issues)
-- Ask a question on [gamedev stack overflow](http://gamedev.stackexchange.com/questions/tagged/monogame-extended)
-- Post on our [MonoGame community forum](http://community.monogame.net/category/extended)
-- Follow development [on Patreon](https://www.patreon.com/craftworkgames)
-
+## TODO
+- Explore 100500 bugs. Try to fix them. 
 
 ## Credits
 As a special thanks to those that supported this project through Patreon in the past, their websites were linked in this readme and have been preserved below:
