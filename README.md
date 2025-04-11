@@ -1,4 +1,4 @@
-# MonoGame.Extended - develop branch
+# MonoGame.Extended 4.0.4 - develop branch
 ![](Images/logo.png)
 
 ## About this fork
